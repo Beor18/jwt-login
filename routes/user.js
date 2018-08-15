@@ -86,6 +86,7 @@ router.post('/login', (req, res) => {
                         }, (err, token) => {
                             if (err) console.error('Error en token', err);
                             else {
+                                res.redirect('/api/users/me?secret_token=' + token);
                                 res.json({
                                     success: true,
                                     token: `Bearer ${token}`
