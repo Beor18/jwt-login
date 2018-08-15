@@ -9,14 +9,14 @@ const validateLoginInput = require('../validacion/login');
 
 const User = require('../models/User');
 
-router.post('/register', function(req, res) {
+router.post('/register', async function(req, res) {
 
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    User.findOne({
+    await User.findOne({
         email: req.body.email
     }).then(user => {
         if (user) {
@@ -56,7 +56,7 @@ router.post('/register', function(req, res) {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async(req, res) => {
 
     const { errors, isValid } = validateLoginInput(req.body);
 
@@ -67,7 +67,7 @@ router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    User.findOne({ email })
+    await User.findOne({ email })
         .then(user => {
             if (!user) {
                 errors.email = 'User no encontrado'
