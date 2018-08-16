@@ -8,6 +8,7 @@ const validateRegisterInput = require('../validacion/registro');
 const validateLoginInput = require('../validacion/login');
 
 const User = require('../models/User');
+const Producto = require('../models/Producto');
 
 router.post('/register', async function(req, res) {
 
@@ -86,7 +87,6 @@ router.post('/login', async(req, res) => {
                         }, (err, token) => {
                             if (err) console.error('Error en token', err);
                             else {
-                                res.redirect('/api/users/me?secret_token=' + token);
                                 res.json({
                                     success: true,
                                     token: `Bearer ${token}`
@@ -99,14 +99,6 @@ router.post('/login', async(req, res) => {
                     }
                 });
         });
-});
-
-router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
-    return res.json({
-        id: req.user.id,
-        name: req.user.name,
-        email: req.user.email
-    });
 });
 
 module.exports = router;

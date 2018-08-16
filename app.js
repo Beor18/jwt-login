@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./db');
 
+const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -18,7 +19,9 @@ require('./passport')(passport);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.use('/api/users', users);
+app.use('/api/users', passport.authenticate('jwt', { session: false }), rutasSeguras);
 
 app.get('/', function(req, res) {
     res.send('Hola');
