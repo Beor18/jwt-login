@@ -19,5 +19,24 @@ $ nodemon app
 ```js
 /api/users/login (POST)
 /api/users/register (POST)
+/api/users/producto?secret_token={{token}} (POST)
+
 /api/users/me?secret_token={{token}} (GET)
+/api/users/producto?secret_token={{token}} (GET)
+```
+#### Modelo User
+
+```
+name: tipo String - requerido
+email: tipo String - requerido
+password: tipo String - requerido
+avatar: tipo String
+date: tipo Date
+```
+
+#### Modelo Producto
+
+```
+titulo: tipo String
+autor: tipo String
 ```
