@@ -16,6 +16,7 @@ router.get('/me', (req, res, next) => {
 });
 
 router.get('/producto', async(req, res, next) => {
+    req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
     const p = await Producto.find();
     return res.status(200).json(p);
 });

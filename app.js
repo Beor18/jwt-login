@@ -3,14 +3,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./db');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
-
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
-    () => { console.log('Database conectado!') },
-    err => { console.log('Database NO conectado!' + err) }
-);
 
 const app = express();
 
@@ -21,6 +18,16 @@ app.use((req, res, next) => {
 
     next();
 });
+
+// Manejo de sesiones
+app.use(session({
+    secret: 'some-secret',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+        mongooseConnection: config,
+    })
+}));
 
 app.use(passport.initialize());
 require('./passport')(passport);
