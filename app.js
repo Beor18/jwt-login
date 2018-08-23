@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 
 
 app.use('/api/users', users);
-app.use('/api/users', passport.authenticate('jwt', { session: false }), rutasSeguras);
+app.use('/api', passport.authenticate('jwt', { session: false }), rutasSeguras);
 
 app.get('/', function(req, res) {
     res.send('Hola');

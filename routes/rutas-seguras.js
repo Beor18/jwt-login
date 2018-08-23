@@ -6,7 +6,7 @@ const passport = require('passport');
 const User = require('../models/User');
 const Producto = require('../models/Producto');
 
-router.get('/me', (req, res, next) => {
+router.get('/perfil', (req, res, next) => {
     return res.json({
         id: req.user.id,
         name: req.user.name,
@@ -17,8 +17,27 @@ router.get('/me', (req, res, next) => {
 
 router.get('/producto', async(req, res, next) => {
     req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
-    const p = await Producto.find();
-    return res.status(200).json(p);
+    let perPage = req.query.perPage || 9;
+    perPage = Number(perPage);
+
+    let page = req.query.page || 1;
+    page = Number(page);
+
+    Producto
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, p) => {
+            Producto.count((err, count) => {
+                if (err) return next(err);
+                res.json({
+                    ok: true,
+                    p,
+                    cuantos: count,
+                    resultados: perPage
+                });
+            });
+        });
 });
 
 router.post('/producto', async(req, res) => {
