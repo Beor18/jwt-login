@@ -6,6 +6,24 @@ const passport = require('passport');
 const User = require('../models/User');
 const Producto = require('../models/Producto');
 
+// Subir imagenes y/o fotos
+
+const path = require('path');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './public/imagenes-subidas');
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + '-' + file.originalname.replace(path.extname(file.originalname), '_') + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// FIN Subir imagenes y/o fotos
+
 router.get('/perfil', (req, res, next) => {
     return res.json({
         id: req.user.id,
@@ -28,7 +46,7 @@ router.get('/producto', async(req, res, next) => {
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, p) => {
-            Producto.count((err, count) => {
+            Producto.countDocuments((err, count) => {
                 if (err) return next(err);
                 res.json({
                     ok: true,
@@ -40,12 +58,17 @@ router.get('/producto', async(req, res, next) => {
         });
 });
 
-router.post('/producto', async(req, res) => {
-    const producto = new Producto(req.body);
+router.post('/producto', upload.single('fotoproducto'), async(req, res) => {
+    const producto = new Producto({
+        titulo: req.body.titulo,
+        autor: req.body.autor,
+        foto: req.file.filename
+    });
 
     await producto.save(() => {
-        user: req.user
+        //user: req.user
         res.send("Producto agregado con éxito!");
+        console.log("Producto e imagen agregado con éxito!");
     });
 });
 

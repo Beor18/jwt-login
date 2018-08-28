@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const ProductoSchema = new Schema({
     titulo: { type: String },
-    autor: { type: String }
+    autor: { type: String },
+    foto: { type: String }
 
 });
 
