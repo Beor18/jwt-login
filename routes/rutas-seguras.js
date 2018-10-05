@@ -25,11 +25,13 @@ const upload = multer({ storage: storage });
 // FIN Subir imagenes y/o fotos
 
 router.get('/perfil', (req, res, next) => {
+    let token = req.query.secret_token;
     return res.json({
         id: req.user.id,
         name: req.user.name,
         email: req.user.email,
-        token: req.query.secret_token
+        token: req.query.secret_token,
+        productos_url: '/api/producto?secret_token=' + token
     });
 });
 

@@ -87,10 +87,8 @@ router.post('/login', async(req, res) => {
                         }, (err, token) => {
                             if (err) console.error('Error en token', err);
                             else {
-                                res.json({
-                                    success: true,
-                                    token: `${token}`
-                                });
+
+                                res.redirect('/api/perfil?secret_token=' + token);
                             }
                         });
                     } else {
