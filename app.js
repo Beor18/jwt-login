@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const config = require('./db');
+const config = require('./config/db');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -31,7 +31,7 @@ app.use(session({
 }));
 
 app.use(passport.initialize());
-require('./passport')(passport);
+require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
