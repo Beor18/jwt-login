@@ -4,14 +4,30 @@
 
 Tener instalado [Node.js](https://nodejs.org/) y [MongoDB](https://www.mongodb.com/es).
 
-- ***Correr una instancia Mongo***
+Set variable de entorno de MongoDb:
 
-Instalar las dependencias y ejecutar con Nodemon el server:
+```sh
+$ export MONGODB_URL="mongodb://..."
+```
+
+Instalar las dependencias e iniciar:
 
 ```sh
 $ npm install
-$ nodemon app
 ```
+
+En modo desarrollo
+
+```sh
+$ npm run dev
+```
+
+En modo debug:
+
+```sh
+$ npm run debug
+```
+
 
 #### Rutas (utilizar postman)
 
