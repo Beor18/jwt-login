@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const config = require('@jwt/config')
+const { getLogger, terminate } = require('@jwt/utils')
+const log = getLogger(__dirname, __filename)
+
 mongoose.Promise = global.Promise;
 
 const uri = 'mongodb://localhost:27017/auth';
@@ -6,10 +10,10 @@ const uri = 'mongodb://localhost:27017/auth';
 
 mongoose.connect(uri, { useNewUrlParser: true })
     .then(function() {
-        console.log('Conectado a la Base de Datos con éxito!');
+        log.info('Conectado a la Base de Datos con éxito!');
     }).catch(function(err) {
-        console.log('Ups! Hubo un error al conectar con la base de datos!');
-        console.log(err.message);
+        log.error('Ups! Hubo un error al conectar con la base de datos!');
+        log.error(err.message);
     });
 
 module.exports = mongoose.connection;

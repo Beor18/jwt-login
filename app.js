@@ -10,6 +10,8 @@ const MongoStore = require('connect-mongo')(session);
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
 
+const { getLogger, logHandler, terminate } = require('@jwt/utils')
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -35,6 +37,7 @@ require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(logHandler);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -45,8 +48,14 @@ app.get('/', function(req, res) {
     res.send('Hola');
 });
 
+const log = getLogger(__dirname, __filename)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server funcionando en puerto ${PORT}`);
+    log.info(`Server funcionando en puerto ${PORT}`);
+
+    process.on('SIGINT', terminate(0, 'SIGINT'))
+    process.on('SIGTERM', terminate(0, 'SIGTERM'))
+    process.on('uncaughtException', terminate(1, 'uncaughtException'))
+    process.on('unhandledRejection', terminate(1, 'unhandledRejection'))
 });
