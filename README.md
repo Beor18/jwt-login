@@ -22,6 +22,12 @@ En modo desarrollo
 $ npm run dev
 ```
 
+En modo produccion, tener pre-instalado [pm2](http://pm2.keymetrics.io/)
+
+```sh
+$ npm start
+```
+
 En modo debug:
 
 ```sh

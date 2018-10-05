@@ -51,11 +51,13 @@ app.get('/', function(req, res) {
 const log = getLogger(__dirname, __filename)
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    log.info(`Server funcionando en puerto ${PORT}`);
+if (!module.parent) {
+    app.listen(PORT, () => {
+        log.info(`Server funcionando en puerto ${PORT}`);
+    })
 
     process.on('SIGINT', terminate(0, 'SIGINT'))
     process.on('SIGTERM', terminate(0, 'SIGTERM'))
     process.on('uncaughtException', terminate(1, 'uncaughtException'))
     process.on('unhandledRejection', terminate(1, 'unhandledRejection'))
-});
+}
