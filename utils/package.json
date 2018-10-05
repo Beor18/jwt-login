@@ -1,0 +1,15 @@
+{
+    "name": "@jwt/utils",
+    "version": "1.0.0",
+    "private": true,
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "bole": "^3.0.2",
+        "chalk": "^2.4.1",
+        "morgan": "^1.9.0",
+        "stream-file-archive": "^1.1.4",
+        "through2": "^2.0.3",
+        "uuid": "^3.2.1"
+    }
+}
