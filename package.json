@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node app.js"
+        "start": "cross-env NODE_ENV=production app.js",
+        "dev": "cross-env NODE_ENV=development nodemon app.js",
+        "debug": "cross-env DEBUG=* node --inspect app.js"
     },
     "keywords": [],
     "author": "",
@@ -22,6 +24,7 @@
         "passport": "^0.4.0",
         "passport-jwt": "^4.0.0",
         "validator": "^10.5.0",
+        "cross-env": "^5.1.6",
         "@jwt/utils": "file:utils",
         "@jwt/config": "file:config"
     },

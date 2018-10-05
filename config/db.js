@@ -5,10 +5,14 @@ const log = getLogger(__dirname, __filename)
 
 mongoose.Promise = global.Promise;
 
-const uri = 'mongodb://localhost:27017/auth';
-// 'mongodb://localhost/test' 
+// En la consola escribir comando export MONGODB_URL="mongodb://localhost:27017/auth"
 
-mongoose.connect(uri, { useNewUrlParser: true })
+if (!config.db) {
+    log.error('Setee la variable de entorno MONGODB_URL')
+    process.exit(1)
+}
+
+mongoose.connect(config.db, { useNewUrlParser: true })
     .then(function() {
         log.info('Conectado a la Base de Datos con éxito!');
     }).catch(function(err) {
@@ -17,4 +21,3 @@ mongoose.connect(uri, { useNewUrlParser: true })
     });
 
 module.exports = mongoose.connection;
-// conecction.js

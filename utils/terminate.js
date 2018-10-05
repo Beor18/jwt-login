@@ -17,7 +17,7 @@ function terminate(code, reason) {
             params.promise = p
         }
 
-        log.info({ message: params })
+        log.warn({ message: params })
 
         if (code === 0) {
             process.exit(code)
