@@ -29,6 +29,7 @@ router.get('/perfil', (req, res, next) => {
     return res.json({
         id: req.user.id,
         name: req.user.name,
+        avatar: req.user.avatar,
         email: req.user.email,
         token: req.query.secret_token,
         productos_url: '/api/producto?secret_token=' + token
@@ -68,7 +69,6 @@ router.post('/producto', upload.single('fotoproducto'), async(req, res) => {
     });
 
     await producto.save(() => {
-        //user: req.user
         res.send("Producto agregado con éxito!");
         console.log("Producto e imagen agregado con éxito!");
     });
