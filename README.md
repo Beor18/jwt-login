@@ -34,6 +34,13 @@ En modo debug:
 $ npm run debug
 ```
 
+Testeaar Api Rest (por ahora registro usuario):
+
+```sh
+$ npm run dev
+$ npm test
+```
+
 
 #### Rutas (utilizar postman)
 
