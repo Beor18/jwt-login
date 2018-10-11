@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
-const passport = require('passport');
 
 const User = require('../models/User');
 const Producto = require('../models/Producto');
