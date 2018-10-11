@@ -5,7 +5,7 @@ const passport = require('passport');
 
 const User = require('../models/User');
 const Producto = require('../models/Producto');
-
+const productoController = require('../controllers/producto.controller');
 // Subir imagenes y/o fotos
 
 const path = require('path');
@@ -24,42 +24,9 @@ const upload = multer({ storage: storage });
 
 // FIN Subir imagenes y/o fotos
 
-router.get('/perfil', (req, res, next) => {
-    let token = req.query.secret_token;
-    return res.json({
-        id: req.user.id,
-        name: req.user.name,
-        avatar: req.user.avatar,
-        email: req.user.email,
-        token: req.query.secret_token,
-        productos_url: '/api/producto?secret_token=' + token
-    });
-});
+router.get('/perfil', productoController.getPerfil);
 
-router.get('/producto', async(req, res, next) => {
-    req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
-    let perPage = req.query.perPage || 9;
-    perPage = Number(perPage);
-
-    let page = req.query.page || 1;
-    page = Number(page);
-
-    Producto
-        .find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec((err, p) => {
-            Producto.countDocuments((err, count) => {
-                if (err) return next(err);
-                res.json({
-                    ok: true,
-                    p,
-                    cuantos: count,
-                    resultados: perPage
-                });
-            });
-        });
-});
+router.get('/producto', productoController.getProducto);
 
 router.post('/producto', upload.single('fotoproducto'), async(req, res) => {
     const producto = new Producto({
