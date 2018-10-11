@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const Producto = require('../models/Producto');
+const gravatar = require('gravatar');
+const passport = require('passport');
 
 
 async function getPerfil(req, res, next) {
