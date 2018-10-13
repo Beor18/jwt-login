@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/User');
-const Producto = require('../models/Producto');
 const productoController = require('../controllers/producto.controller');
 // Subir imagenes y/o fotos
 
@@ -26,17 +24,7 @@ router.get('/perfil', productoController.getPerfil);
 
 router.get('/producto', productoController.getProducto);
 
-router.post('/producto', upload.single('fotoproducto'), async(req, res) => {
-    const producto = new Producto({
-        titulo: req.body.titulo,
-        autor: req.body.autor,
-        foto: req.file.filename
-    });
+router.post('/producto', upload.single('fotoproducto'), productoController.postProducto);
 
-    await producto.save(() => {
-        res.send("Producto agregado con éxito!");
-        console.log("Producto e imagen agregado con éxito!");
-    });
-});
 
 module.exports = router;

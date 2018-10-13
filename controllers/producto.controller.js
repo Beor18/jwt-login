@@ -41,7 +41,21 @@ async function getProducto(req, res, next) {
         });
 }
 
+async function postProducto(req, res) {
+    const producto = new Producto({
+        titulo: req.body.titulo,
+        autor: req.body.autor,
+        foto: req.file.filename
+    });
+    await producto.save(() => {
+        res.send("Producto agregado con éxito!");
+        console.log("Producto e imagen agregado con éxito!");
+    });
+
+}
+
 module.exports = {
     getProducto,
-    getPerfil
+    getPerfil,
+    postProducto
 };
