@@ -26,5 +26,7 @@ router.get('/producto', productoController.getProducto);
 
 router.post('/producto', upload.single('fotoproducto'), productoController.postProducto);
 
+router.delete('/producto/delete/:id', productoController.deleteProducto);
+
 
 module.exports = router;

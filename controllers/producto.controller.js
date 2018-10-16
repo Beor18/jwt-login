@@ -54,8 +54,19 @@ async function postProducto(req, res) {
 
 }
 
+async function deleteProducto(req, res) {
+    Producto.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            return res.send(err);
+        } else {
+            res.send('Producto Borrado con éxito!');
+        }
+    });
+}
+
 module.exports = {
     getProducto,
     getPerfil,
-    postProducto
+    postProducto,
+    deleteProducto
 };
