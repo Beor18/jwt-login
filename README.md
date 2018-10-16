@@ -48,10 +48,11 @@ $ npm test
 ```js
 /api/users/login (POST)
 /api/users/register (POST)
-/api/users/producto?secret_token={{token}} (POST)
 
-/api/users/me?secret_token={{token}} (GET)
-/api/users/producto?secret_token={{token}} (GET)
+/api/perfil?secret_token={{token}} (GET)
+/api/producto?secret_token={{token}} (GET)
+/api/producto?secret_token={{token}} (POST)
+/api/producto/delete/:id?secret_token={{token}} (DELETE)
 ```
 #### Modelo User
 
