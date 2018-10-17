@@ -50,8 +50,10 @@ $ npm test
 /api/users/register (POST)
 
 /api/perfil?secret_token={{token}} (GET)
-/api/producto?secret_token={{token}} (GET)
-/api/producto?secret_token={{token}} (POST)
+/api/productos?secret_token={{token}} (GET)
+/api/producto/agregar?secret_token={{token}} (POST)
+/api/producto/ver/:id?secret_token={{token}} (GET)
+/api/producto/modificar/:id?secret_token={{token}} (POST)
 /api/producto/delete/:id?secret_token={{token}} (DELETE)
 ```
 #### Modelo User
