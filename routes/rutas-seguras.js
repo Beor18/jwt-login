@@ -22,10 +22,19 @@ const upload = multer({ storage: storage });
 
 router.get('/perfil', productoController.getPerfil);
 
-router.get('/producto', productoController.getProducto);
+// Ruta /productos
+router.get('/productos', productoController.getProductos);
 
-router.post('/producto', upload.single('fotoproducto'), productoController.postProducto);
+// Ruta /producto/agregar
+router.post('/producto/agregar', upload.single('fotoproducto'), productoController.postProducto);
 
+// Rutas /producto/ver/:id
+router.get('/producto/ver/:id', productoController.getProductoPorId);
+
+// Rutas /producto/modificar/:id
+router.post('/producto/modificar/:id', upload.single('fotoproducto'), productoController.modificarProducto);
+
+// Rutas /producto/delete/:id
 router.delete('/producto/delete/:id', productoController.deleteProducto);
 
 

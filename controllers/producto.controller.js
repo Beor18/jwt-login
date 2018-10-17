@@ -3,6 +3,9 @@ const Producto = require('../models/Producto');
 const gravatar = require('gravatar');
 const passport = require('passport');
 
+const { getLogger } = require('@jwt/utils')
+const log = getLogger(__dirname, __filename)
+
 
 async function getPerfil(req, res, next) {
     let token = req.query.secret_token;
@@ -12,11 +15,11 @@ async function getPerfil(req, res, next) {
         avatar: req.user.avatar,
         email: req.user.email,
         token: req.query.secret_token,
-        productos_url: '/api/producto?secret_token=' + token
+        productos_url: '/api/productos?secret_token=' + token
     });
 }
 
-async function getProducto(req, res, next) {
+async function getProductos(req, res, next) {
     req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
     let perPage = req.query.perPage || 9;
     perPage = Number(perPage);
@@ -41,6 +44,22 @@ async function getProducto(req, res, next) {
         });
 }
 
+async function getProductoPorId(req, res) {
+    Producto.findById(req.params.id, function(err, producto) {
+        //if (err) return next(err);
+        res.json({
+            producto
+        });
+    });
+}
+
+async function modificarProducto(req, res) {
+    const { id } = req.params;
+    await Producto.update({ _id: id }, req.body);
+    res.send('Producto Modificado con éxito!')
+    log.warn('Producto Modificado con éxito!');
+}
+
 async function postProducto(req, res) {
     const producto = new Producto({
         titulo: req.body.titulo,
@@ -49,7 +68,7 @@ async function postProducto(req, res) {
     });
     await producto.save(() => {
         res.send("Producto agregado con éxito!");
-        console.log("Producto e imagen agregado con éxito!");
+        log.info("Producto e imagen agregado con éxito!");
     });
 
 }
@@ -60,13 +79,16 @@ async function deleteProducto(req, res) {
             return res.send(err);
         } else {
             res.send('Producto Borrado con éxito!');
+            log.error('Producto Borrado con éxito!')
         }
     });
 }
 
 module.exports = {
-    getProducto,
+    getProductos,
     getPerfil,
+    getProductoPorId,
+    modificarProducto,
     postProducto,
     deleteProducto
 };
