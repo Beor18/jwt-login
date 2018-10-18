@@ -1,23 +1,9 @@
-const User = require('../models/User');
 const Producto = require('../models/Producto');
-const gravatar = require('gravatar');
 const passport = require('passport');
 
 const { getLogger } = require('@jwt/utils')
 const log = getLogger(__dirname, __filename)
 
-
-async function getPerfil(req, res, next) {
-    let token = req.query.secret_token;
-    return res.json({
-        id: req.user.id,
-        name: req.user.name,
-        avatar: req.user.avatar,
-        email: req.user.email,
-        token: req.query.secret_token,
-        productos_url: '/api/productos?secret_token=' + token
-    });
-}
 
 async function getProductos(req, res, next) {
     req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
@@ -86,7 +72,6 @@ async function deleteProducto(req, res) {
 
 module.exports = {
     getProductos,
-    getPerfil,
     getProductoPorId,
     modificarProducto,
     postProducto,

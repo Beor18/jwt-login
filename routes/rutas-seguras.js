@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const productoController = require('../controllers/producto.controller');
+const perfilController = require('../controllers/perfil.controller');
 // Subir imagenes y/o fotos
 
 const path = require('path');
@@ -20,7 +21,7 @@ const upload = multer({ storage: storage });
 
 // FIN Subir imagenes y/o fotos
 
-router.get('/perfil', productoController.getPerfil);
+router.get('/perfil', perfilController.getPerfil);
 
 // Ruta /productos
 router.get('/productos', productoController.getProductos);
