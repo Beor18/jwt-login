@@ -31,12 +31,16 @@ async function getProductos(req, res, next) {
 }
 
 async function getProductoPorId(req, res) {
-    Producto.findById(req.params.id, function(err, producto) {
-        //if (err) return next(err);
-        res.json({
-            producto
+    try {
+        Producto.findById(req.params.id, function(err, producto) {
+            //if (err) return next(err);
+            res.json({
+                producto
+            });
         });
-    });
+    } catch (err) {
+        log.error('Ups hubo un error al mostrar el producto! ' + err);
+    }
 }
 
 async function modificarProducto(req, res) {
