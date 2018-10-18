@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 const url = 'http://localhost:5000';
 
 // Testeando api rest: registrar usuario
-describe('/ POST /api/users/login', () => {
+describe('/ POST /api/users/register', () => {
     it('Se ha registrado un usuario', (done) => {
         chai.request(url)
             .post('/api/users/register')
