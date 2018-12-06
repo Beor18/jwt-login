@@ -26,17 +26,17 @@ router.get('/perfil', perfilController.getPerfil);
 // Ruta /productos
 router.get('/productos', productoController.getProductos);
 
-// Ruta /producto/agregar
+// Ruta /productos
 router.post('/productos', upload.single('fotoproducto'), productoController.postProducto);
 
-// Rutas /producto/ver/:id
+// Rutas /productos/:id
 router.get('/productos/:id', productoController.getProductoPorId);
 
-// Rutas /producto/modificar/:id
+// Rutas /productos/:id
 router.put('/productos/:id', upload.single('fotoproducto'), productoController.modificarProducto);
 
-// Rutas /producto/delete/:id
-router.delete('/producto/delete/:id', productoController.deleteProducto);
+// Rutas /productos/:id
+router.delete('/productos/:id', productoController.deleteProducto);
 
 
 module.exports = router;
