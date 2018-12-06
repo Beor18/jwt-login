@@ -27,13 +27,13 @@ router.get('/perfil', perfilController.getPerfil);
 router.get('/productos', productoController.getProductos);
 
 // Ruta /producto/agregar
-router.post('/producto/agregar', upload.single('fotoproducto'), productoController.postProducto);
+router.post('/productos', upload.single('fotoproducto'), productoController.postProducto);
 
 // Rutas /producto/ver/:id
-router.get('/producto/ver/:id', productoController.getProductoPorId);
+router.get('/productos/:id', productoController.getProductoPorId);
 
 // Rutas /producto/modificar/:id
-router.post('/producto/modificar/:id', upload.single('fotoproducto'), productoController.modificarProducto);
+router.put('/productos/:id', upload.single('fotoproducto'), productoController.modificarProducto);
 
 // Rutas /producto/delete/:id
 router.delete('/producto/delete/:id', productoController.deleteProducto);
