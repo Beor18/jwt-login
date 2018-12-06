@@ -54,7 +54,7 @@ $ npm test
 /api/productos?secret_token={{token}} (POST)
 /api/productos/:id?secret_token={{token}} (GET)
 /api/productos/:id?secret_token={{token}} (PUT)
-/api/producto/delete/:id?secret_token={{token}} (DELETE)
+/api/productos/:id?secret_token={{token}} (DELETE)
 ```
 #### Modelo User
 
