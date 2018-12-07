@@ -89,7 +89,11 @@ async function postLogin(req, res) {
                                 if (err) console.error('Error en token', err);
                                 else {
 
-                                    res.redirect('/api/perfil?secret_token=' + token);
+                                    return res.status(200).json({
+                                        message: "Bienvenido " + user.name,
+                                        productos_url: '/api/productos',
+                                        token
+                        })
                                 }
                             });
                         } else {

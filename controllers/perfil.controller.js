@@ -13,7 +13,7 @@ async function getPerfil(req, res, next) {
             avatar: req.user.avatar,
             email: req.user.email,
             token: req.query.secret_token,
-            productos_url: '/api/productos?secret_token=' + token
+            productos_url: '/api/productos'
         });
     } catch (err) {
         log.error('Ups Hubo un error! ' + err);
