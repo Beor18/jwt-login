@@ -14,14 +14,14 @@ async function getProductos(req, res, next) {
         let page = req.query.page || 1;
         page = Number(page);
 
-        Producto
+        await Producto
             .find({})
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .exec((err, p) => {
                 Producto.countDocuments((err, count) => {
                     if (err) return next(err);
-                    res.json({
+                    res.status(200).json({
                         ok: true,
                         p,
                         cuantos: count,
@@ -36,11 +36,14 @@ async function getProductos(req, res, next) {
 
 async function getProductoPorId(req, res) {
     try {
-        Producto.findById(req.params.id, function(err, producto) {
-            //if (err) return next(err);
-            res.json({
-                producto
-            });
+        await Producto.findById(req.params.id, function(err, producto) {
+            if (producto === null) {
+                return res.status(404).json({mensaje: 'Producto no encontrado!'});
+            }else {
+                res.status(200).json({
+                    producto
+                });
+            }
         });
     } catch (err) {
         log.error('Ups hubo un error al mostrar el producto! ' + err);
@@ -51,7 +54,7 @@ async function modificarProducto(req, res) {
     try {
         const { id } = req.params;
         await Producto.update({ _id: id }, req.body);
-        res.send('Producto Modificado con éxito!')
+        res.status(200).json('Producto Modificado con éxito!')
         log.warn('Producto Modificado con éxito!');
     } catch (err) {
         log.error('Ups hubo un error al modificar el producto! ' + err);
@@ -67,7 +70,7 @@ async function postProducto(req, res) {
             foto: req.file.filename
         });
         await producto.save(() => {
-            res.send("Producto agregado con éxito!");
+            res.status(201).json("Producto agregado con éxito!");
             log.info("Producto e imagen agregado con éxito!");
         });
     } catch (err) {
@@ -77,11 +80,11 @@ async function postProducto(req, res) {
 
 async function deleteProducto(req, res) {
     try {
-        Producto.findByIdAndRemove(req.params.id, (err) => {
+        await Producto.findByIdAndRemove(req.params.id, (err) => {
             if (err) {
                 return res.send(err);
             } else {
-                res.send('Producto Borrado con éxito!');
+                res.status(200).json('Producto Borrado con éxito!');
                 log.error('Producto Borrado con éxito!')
             }
         });

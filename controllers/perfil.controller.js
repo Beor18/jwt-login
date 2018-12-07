@@ -7,7 +7,7 @@ const log = getLogger(__dirname, __filename)
 async function getPerfil(req, res, next) {
     try {
         let token = req.query.secret_token;
-        return res.json({
+        return res.status(200).json({
             id: req.user.id,
             name: req.user.name,
             avatar: req.user.avatar,
