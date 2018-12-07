@@ -34,7 +34,7 @@ En modo debug:
 $ npm run debug
 ```
 
-Testeaar Api Rest (por ahora registro usuario):
+Testear Api Rest (por ahora registro usuario):
 
 ```sh
 $ npm run dev
@@ -49,12 +49,12 @@ $ npm test
 /api/users/login (POST)
 /api/users/register (POST)
 
-/api/perfil?secret_token={{token}} (GET)
-/api/productos?secret_token={{token}} (GET)
-/api/productos?secret_token={{token}} (POST)
-/api/productos/:id?secret_token={{token}} (GET)
-/api/productos/:id?secret_token={{token}} (PUT)
-/api/productos/:id?secret_token={{token}} (DELETE)
+/api/perfil (GET)
+/api/productos (GET)
+/api/productos (POST)
+/api/productos/:id (GET)
+/api/productos/:id (PUT)
+/api/productos/:id (DELETE)
 ```
 #### Modelo User
 
