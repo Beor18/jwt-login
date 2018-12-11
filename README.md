@@ -71,4 +71,5 @@ date: tipo Date
 ```
 titulo: tipo String
 autor: tipo String
+foto: tipo: String
 ```
