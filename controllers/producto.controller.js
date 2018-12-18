@@ -7,7 +7,6 @@ const log = getLogger(__dirname, __filename)
 
 async function getProductos(req, res, next) {
     try {
-        req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
         let perPage = req.query.perPage || 9;
         perPage = Number(perPage);
 

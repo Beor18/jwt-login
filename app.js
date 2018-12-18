@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config/db');
 const path = require('path');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+// const session = require('express-session'); (OPCIONAL)
+// const MongoStore = require('connect-mongo')(session);
 
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
@@ -22,15 +22,18 @@ app.use((req, res, next) => {
     next();
 });
 
-// Manejo de sesiones
-app.use(session({
-    secret: 'some-secret',
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({
-        mongooseConnection: config,
-    })
-}));
+// Manejo de sesiones (OPCIONAL)
+// app.use(session({
+//     secret: 'some-secret',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: new MongoStore({
+//         mongooseConnection: config,
+//     })
+// }));
+
+// Dentro de una funcion en algun controller agregar esta linea:
+// req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
