@@ -3,24 +3,19 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config/db');
-const path = require('path');
+const cors = require('cors');
 // const session = require('express-session'); (OPCIONAL)
 // const MongoStore = require('connect-mongo')(session);
 
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
 
-const { getLogger, logHandler, terminate } = require('@jwt/utils')
+const { getLogger, logHandler, terminate } = require('@jwt/utils');
+require('./config/passport')(passport);
 
 const app = express();
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-
-    next();
-});
+const log = getLogger(__dirname, __filename)
+const PORT = process.env.PORT || 5000;
 
 // Manejo de sesiones (OPCIONAL)
 // app.use(session({
@@ -32,27 +27,22 @@ app.use((req, res, next) => {
 //     })
 // }));
 
-// Dentro de una funcion en algun controller agregar esta linea:
-// req.session.cuenta = req.session.cuenta ? req.session.cuenta + 1 : 1
-
+app.use(cors());
 app.use(passport.initialize());
-require('./config/passport')(passport);
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logHandler);
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use('/api/users', users);
 app.use('/api', passport.authenticate('jwt', { session: false }), rutasSeguras);
 
-app.get('/', function(req, res) {
-    res.send('Hola');
-});
+app.disable('etag');
+app.disable('x-powered-by');
 
-const log = getLogger(__dirname, __filename)
-const PORT = process.env.PORT || 5000;
+app.get('/', (req, res) => {
+    res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');
+});
 
 if (!module.parent) {
     app.listen(PORT, () => {

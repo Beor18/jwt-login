@@ -4,7 +4,7 @@
 
 Tener instalado [Node.js](https://nodejs.org/) y [MongoDB](https://www.mongodb.com/es).
 
-Set variable de entorno de MongoDb:
+Setee variable de entorno de MongoDb:
 
 ```sh
 $ export MONGODB_URL="mongodb://..."
@@ -50,26 +50,36 @@ $ npm test
 /api/users/register (POST)
 
 /api/perfil (GET)
-/api/productos (GET)
-/api/productos (POST)
-/api/productos/:id (GET)
-/api/productos/:id (PUT)
-/api/productos/:id (DELETE)
+/api/peliculas (GET)
+/api/peliculas (POST)
+/api/peliculas/:id (GET)
+/api/peliculas/:id (PUT)
+/api/peliculas/:id (DELETE)
 ```
 #### Modelo User
 
 ```
-name: tipo String - requerido
-email: tipo String - requerido
-password: tipo String - requerido
-avatar: tipo String
-date: tipo Date
+name: String - requerido
+email: String - requerido
+password: String - requerido
+avatar: String
+date: Date
 ```
 
-#### Modelo Producto
+#### Modelo Peliculas
 
 ```
-titulo: tipo String
-autor: tipo String
-foto: tipo: String
+name: String
+description: String
+stars: Array
+year: Number
+gender: String
+categories: Array
+```
+
+### Modelo Categorias
+
+```
+name: String
+date: Date
 ```
