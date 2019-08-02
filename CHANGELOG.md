@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/Beor18/jwt-login/compare/v0.1.0...v0.1.1) (2019-08-02)
+
+
+### Bug Fixes
+
+* change routes and populate categories ([e40adab](https://github.com/Beor18/jwt-login/commit/e40adab))
+
+
+
 ## 0.1.0 (2019-08-01)
 
 
