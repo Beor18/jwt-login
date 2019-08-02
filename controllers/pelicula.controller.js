@@ -1,4 +1,4 @@
-const Pelicula = require('../models/Pelicula');
+const { Pelicula, Categorie} = require('../models/Pelicula');
 const passport = require('passport');
 
 const { getLogger } = require('@jwt/utils')
@@ -15,6 +15,7 @@ async function getPeliculas(req, res, next) {
 
         await Pelicula
             .find({})
+            .populate('categories')
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .exec((err, peliculas) => {
@@ -89,6 +90,23 @@ async function deletePelicula(req, res) {
     }
 }
 
+async function postCategories(req, res) {
+    try {
+        const { id } = req.params;
+		const newCategorie = new Categorie(req.body);
+		const pelicula = await Pelicula.findById(id);
+		newCategorie.pelicula = pelicula;
+		await newCategorie.save();
+		pelicula.categories.push(newCategorie);
+		await pelicula.save(() => {
+            res.status(201).json({mensaje: 'Categoria agregada con éxito a la pelicula!'});
+            log.info('Categoria agregado con éxito a la Pelicula!');
+        });
+    } catch (err) {
+        log.error('Ups hubo un error!!' + err);
+    }
+}
+
 async function filtroEstrella(req, res) {
     try {
         await Pelicula.find({'stars': req.params.stars}, (err, pelicula) => {
@@ -116,5 +134,6 @@ module.exports = {
     modificarPelicula,
     postPelicula,
     deletePelicula,
+    postCategories,
     filtroEstrella
 };

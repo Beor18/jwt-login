@@ -18,6 +18,10 @@ router.route('/peliculas/:id')
     .put(peliculaController.modificarPelicula)
     .delete(peliculaController.deletePelicula);
 
+// Ruta agregar categorias a una pelicula especifica
+router.route('/peliculas/:id/categorias')
+    .post(peliculaController.postCategories);
+
 // Ruta filtro estrellas
 router.route('/stars/:stars')
     .get(peliculaController.filtroEstrella);
