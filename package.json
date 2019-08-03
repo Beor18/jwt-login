@@ -29,12 +29,13 @@
         "jsonwebtoken": "^8.3.0",
         "mocha": "^5.2.0",
         "mongoose": "^5.4.10",
+        "newrelic": "^5.11.0",
         "passport": "^0.4.0",
         "passport-jwt": "^4.0.0",
         "restify": "^4.3.0",
         "restify-cookies": "^0.2.2",
-        "validator": "^10.5.0",
-        "standard-version": "^6.0.1"
+        "standard-version": "^6.0.1",
+        "validator": "^10.5.0"
     },
     "devDependencies": {
         "nodemon": "^1.18.3"
