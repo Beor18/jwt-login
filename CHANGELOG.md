@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/Beor18/jwt-login/compare/v0.1.2...v0.1.3) (2019-08-03)
+
+
+### Bug Fixes
+
+* add config new relic ([a378705](https://github.com/Beor18/jwt-login/commit/a378705))
+* update model peliculas ([4690529](https://github.com/Beor18/jwt-login/commit/4690529))
+* update readme ([b96f468](https://github.com/Beor18/jwt-login/commit/b96f468))
+
+
+
 ### [0.1.2](https://github.com/Beor18/jwt-login/compare/v0.1.1...v0.1.2) (2019-08-03)
 
 
