@@ -71,7 +71,9 @@ date: Date
 ```
 name: String
 description: String
-stars: Array
+link: String
+images: Array
+stars: Number
 year: Number
 gender: String
 categories: Array
