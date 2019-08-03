@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const PeliculaSchema = new Schema({
     name: { type: String },
     description: { type: String },
-    stars: { type: Array },
+    link: { type: String },
+    images: { type: Array },
+    stars: { type: Number },
     year: { type: Number },
     gender: { type: String },
     categories: [{ type: Schema.Types.ObjectId, ref: 'Categorie' }]
