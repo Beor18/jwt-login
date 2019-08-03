@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const rolesValidos = {
+    values: ['administrador', 'usuario'],
+    message: '{ VALUE } no es un rol valido'
+}
+
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -19,6 +24,9 @@ const UserSchema = new Schema({
     },
     avatar: {
         type: String
+    },
+    role: {
+        type: String, default: 'usuario', enum: rolesValidos
     },
     date: {
         type: Date,
