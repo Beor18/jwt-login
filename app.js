@@ -11,7 +11,7 @@ const cors = require('cors');
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
 
-const user = require('../models/User');
+const user = require('./models/User');
 
 const { getLogger, logHandler, terminate } = require('@jwt/utils');
 require('./config/passport')(passport);
