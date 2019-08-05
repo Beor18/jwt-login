@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
     if (req.user.role === 'administrador') {
         res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');   
     } else {
-        res.status(500).json({
+        res.status(404).json({
             mensaje: 'Ups! Sin permisos. Por favor sea admin.'
         });
     }
