@@ -145,5 +145,6 @@ module.exports = {
     postPelicula,
     deletePelicula,
     postCategories,
-    filtroEstrella
+    filtroEstrella,
+    rutaPruebaRole
 };
