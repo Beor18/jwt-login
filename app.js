@@ -11,8 +11,6 @@ const cors = require('cors');
 const rutasSeguras = require('./routes/rutas-seguras');
 const users = require('./routes/user');
 
-const user = require('./models/User');
-
 const { getLogger, logHandler, terminate } = require('@jwt/utils');
 require('./config/passport')(passport);
 
@@ -44,13 +42,7 @@ app.disable('etag');
 app.disable('x-powered-by');
 
 app.get('/', (req, res) => {
-    if (req.user.role === 'administrador') {
-        res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');   
-    } else {
-        res.status(404).json({
-            mensaje: 'Ups! Sin permisos. Por favor sea admin.'
-        });
-    }
+    res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');
 });
 
 if (!module.parent) {

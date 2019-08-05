@@ -128,6 +128,16 @@ async function filtroEstrella(req, res) {
     }
 }
 
+async function rutaPruebaRole(req, res) {
+    if (req.user.role === 'administrador') {
+        res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');   
+    } else {
+        res.status(404).json({
+            mensaje: 'Ups! Sin permisos. Por favor sea admin.'
+        });
+    }
+}
+
 module.exports = {
     getPeliculas,
     getPeliculaPorId,
