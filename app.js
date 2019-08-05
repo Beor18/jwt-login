@@ -42,7 +42,13 @@ app.disable('etag');
 app.disable('x-powered-by');
 
 app.get('/', (req, res) => {
-    res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');
+    if (req.user.role === 'administrador') {
+        res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');   
+    } else {
+        res.status(500).json({
+            mensaje: 'Ups! Sin permisos. Por favor sea admin.'
+        });
+    }
 });
 
 if (!module.parent) {
