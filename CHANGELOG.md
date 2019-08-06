@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Beor18/jwt-login/compare/v0.1.4...v0.2.0) (2019-08-06)
+
+
+### Bug Fixes
+
+* add role ([f4017c8](https://github.com/Beor18/jwt-login/commit/f4017c8))
+* add route role ([c557d04](https://github.com/Beor18/jwt-login/commit/c557d04))
+* change route ([95ec8b7](https://github.com/Beor18/jwt-login/commit/95ec8b7))
+* change routes and fix controller ([d9920eb](https://github.com/Beor18/jwt-login/commit/d9920eb))
+* fix app ([5929625](https://github.com/Beor18/jwt-login/commit/5929625))
+* fix app ([127b87c](https://github.com/Beor18/jwt-login/commit/127b87c))
+
+
+### Features
+
+* add roles ([2fc49cd](https://github.com/Beor18/jwt-login/commit/2fc49cd))
+
+
+
 ### [0.1.4](https://github.com/Beor18/jwt-login/compare/v0.1.3...v0.1.4) (2019-08-03)
 
 
