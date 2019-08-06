@@ -26,8 +26,4 @@ router.route('/peliculas/:id/categorias')
 router.route('/stars/:stars')
     .get(peliculaController.filtroEstrella);
 
-router.route('/role')
-    .get(peliculaController.rutaPruebaRole);
-
-
 module.exports = router;

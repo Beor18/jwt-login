@@ -92,16 +92,22 @@ async function deletePelicula(req, res) {
 
 async function postCategories(req, res) {
     try {
-        const { id } = req.params;
-		const newCategorie = new Categorie(req.body);
-		const pelicula = await Pelicula.findById(id);
-		newCategorie.pelicula = pelicula;
-		await newCategorie.save();
-		pelicula.categories.push(newCategorie);
-		await pelicula.save(() => {
-            res.status(201).json({mensaje: 'Categoria agregada con éxito a la pelicula!'});
-            log.info('Categoria agregado con éxito a la Pelicula!');
-        });
+        if (req.user.role === 'administrador') {
+            const { id } = req.params;
+            const newCategorie = new Categorie(req.body);
+            const pelicula = await Pelicula.findById(id);
+            newCategorie.pelicula = pelicula;
+            await newCategorie.save();
+            pelicula.categories.push(newCategorie);
+            await pelicula.save(() => {
+                res.status(201).json({mensaje: 'Categoria agregada con éxito a la pelicula!'});
+                log.info('Categoria agregado con éxito a la Pelicula!');
+            });
+        } else {
+            res.status(401).json({
+                mensaje: 'Ups! Sin permisos. Por favor sea admin.'
+            });
+        }
     } catch (err) {
         log.error('Ups hubo un error!!' + err);
     }
@@ -128,16 +134,6 @@ async function filtroEstrella(req, res) {
     }
 }
 
-async function rutaPruebaRole(req, res) {
-    if (req.user.role === 'administrador') {
-        res.send('Hola api rest de Peliculas! creado por Fernando López y Logan');   
-    } else {
-        res.status(404).json({
-            mensaje: 'Ups! Sin permisos. Por favor sea admin.'
-        });
-    }
-}
-
 module.exports = {
     getPeliculas,
     getPeliculaPorId,
@@ -145,6 +141,5 @@ module.exports = {
     postPelicula,
     deletePelicula,
     postCategories,
-    filtroEstrella,
-    rutaPruebaRole
+    filtroEstrella
 };
