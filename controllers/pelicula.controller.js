@@ -65,7 +65,15 @@ async function modificarPelicula(req, res) {
 
 async function postPelicula(req, res) {
     try {
-        const pelicula = new Pelicula(req.body);
+        const pelicula = new Pelicula({
+            name: req.body.name,
+            description: req.body.description,
+            link: req.body.link,
+            images: req.body.images,
+            stars: req.body.stars,
+            year: req.body.year,
+            gender: req.body.gender
+        });
         await pelicula.save(() => {
             res.status(201).json("Pelicula agregada con éxito!");
             log.info("Peliculaagregada con éxito!");
