@@ -85,14 +85,14 @@ async function postLogin(req, res) {
                             }
                             jwt.sign(payload, 'secret', {
                                 expiresIn: 3600
-                            }, (err, token) => {
+                            }, (err, jwt) => {
                                 if (err) console.error('Error en token', err);
                                 else {
 
                                     return res.status(200).json({
                                         message: "Bienvenido " + user.name,
                                         productos_url: '/api/productos',
-                                        token
+                                        jwt
                         })
                                 }
                             });
