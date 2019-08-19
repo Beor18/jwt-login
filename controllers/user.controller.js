@@ -72,7 +72,7 @@ async function postLogin(req, res) {
         await User.findOne({ email })
             .then(user => {
                 if (!user) {
-                    errors.email = 'User no encontrado'
+                    errors.email = 'El usuario no existe'
                     return res.status(404).json(errors);
                 }
                 bcrypt.compare(password, user.password)
@@ -81,6 +81,7 @@ async function postLogin(req, res) {
                             const payload = {
                                 id: user.id,
                                 name: user.name,
+                                role: user.role,
                                 avatar: user.avatar
                             }
                             jwt.sign(payload, 'secret', {
@@ -88,16 +89,14 @@ async function postLogin(req, res) {
                             }, (err, jwt) => {
                                 if (err) console.error('Error en token', err);
                                 else {
-
                                     return res.status(200).json({
                                         message: "Bienvenido " + user.name,
-                                        productos_url: '/api/productos',
                                         jwt: `Bearer ${jwt}`
-                        })
+                                    })
                                 }
                             });
                         } else {
-                            errors.password = 'Pass incorrecta';
+                            errors.password = 'Contraseña incorrecta';
                             return res.status(400).json(errors);
                         }
                     });
