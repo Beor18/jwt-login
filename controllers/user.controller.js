@@ -92,7 +92,7 @@ async function postLogin(req, res) {
                                     return res.status(200).json({
                                         message: "Bienvenido " + user.name,
                                         productos_url: '/api/productos',
-                                        jwt
+                                        jwt: `Bearer ${jwt}`
                         })
                                 }
                             });
