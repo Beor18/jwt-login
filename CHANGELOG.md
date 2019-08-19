@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/Beor18/jwt-login/compare/v0.2.1...v0.2.2) (2019-08-19)
+
+
+### Bug Fixes
+
+* add role perfil controller ([961a7d9](https://github.com/Beor18/jwt-login/commit/961a7d9))
+* change user controller ([578704c](https://github.com/Beor18/jwt-login/commit/578704c))
+* fix user controller ([c1874e7](https://github.com/Beor18/jwt-login/commit/c1874e7))
+* fix user controller ([3b4f96c](https://github.com/Beor18/jwt-login/commit/3b4f96c))
+
+
+
 ### [0.2.1](https://github.com/Beor18/jwt-login/compare/v0.2.0...v0.2.1) (2019-08-08)
 
 
