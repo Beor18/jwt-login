@@ -9,6 +9,7 @@ async function getPerfil(req, res, next) {
         return res.status(200).json({
             id: req.user.id,
             name: req.user.name,
+            role: req.user.role,
             avatar: req.user.avatar,
             email: req.user.email,
             token: req.query.secret_token,
